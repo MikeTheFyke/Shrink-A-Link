@@ -4,3 +4,4 @@ nodemon express_server
 - NodeJs
 - Express
 - Nodemon
+- EJS
