@@ -50,7 +50,12 @@ app.post("/login", (req, res) => {
 	res.redirect("urls");
 });
 
-app.post("/logout", (reg, res) => {});
+app.post("/logout", (req, res) => {
+	res.clearCookie("username", req.body.username, {
+		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+	});
+	res.redirect("urls");
+});
 
 app.get("/urls", (req, res) => {
 	const templateVars = {
