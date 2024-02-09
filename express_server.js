@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PORT = 8080; // default port 8080
 
+var cookieParser = require("cookie-parser");
+
 const urlPrefix = "http://";
 const extendedUrlPrefix = "https://";
 
@@ -26,7 +28,7 @@ const formatURL = (url) => {
 };
 
 app.set("view engine", "ejs");
-
+app.use(cookieParser());
 // urlencoded converts the request body from a Buffer to a string,
 // which will be avaialble to us in the req.body.
 app.use(express.urlencoded({ extended: true }));
@@ -42,14 +44,17 @@ app.get("/", (req, res) => {
 
 app.post("/login", (req, res) => {
 	res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-	res.cookie("name", req.body.username, {
+	res.cookie("username", req.body.username, {
 		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
 	});
 	res.redirect("urls");
 });
 
 app.get("/urls", (req, res) => {
-	const templateVars = { urls: urlDatabase };
+	const templateVars = {
+		username: req.cookies.username,
+		urls: urlDatabase,
+	};
 	res.render("urls_index", templateVars);
 });
 
