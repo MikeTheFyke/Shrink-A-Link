@@ -17,6 +17,14 @@ const generateRandomString = () => {
 	return text;
 };
 
+const formatURL = (url) => {
+	if (url.includes(urlPrefix) || url.includes(extendedUrlPrefix)) {
+		return url;
+	} else {
+		return urlPrefix.concat(url);
+	}
+};
+
 app.set("view engine", "ejs");
 
 // urlencoded converts the request body from a Buffer to a string,
@@ -47,13 +55,7 @@ app.get("/urls/new", (req, res) => {
 
 app.post("/urls", (req, res) => {
 	const newId = generateRandomString();
-	let newURL;
-	if (req.body.longURL.includes(urlPrefix) || req.body.longURL.includes(extendedUrlPrefix)) {
-		newURL = req.body.longURL;
-	} else {
-		newURL = urlPrefix.concat(req.body.longURL);
-	}
-	urlDatabase[newId] = newURL;
+	urlDatabase[newId] = formatURL(req.body.longURL);
 	res.redirect(`urls/${newId}`);
 });
 
@@ -63,8 +65,8 @@ app.get("/urls/:id", (req, res) => {
 });
 
 app.post("/urls/:id", (req, res) => {
-	const templateVars = { id: req.params.id, longURL: urlDatabase[req.params.id] };
-	res.redirect("/urls/:id", templateVars);
+	urlDatabase[req.params.id] = formatURL(req.body.longURL);
+	res.redirect("/urls");
 });
 
 app.post("/urls/:id/delete", (req, res) => {

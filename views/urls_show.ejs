@@ -20,8 +20,10 @@
 				<p class="card-text">Shrunk URL ID: <a target="_blank" href="<%= longURL %>"><%= id %></a></p>
 			</div>
 			<div class="card-footer text-muted">
-				<form method="POST" action="/urls/<=% id %>">
-					<input />
+				<form method="POST" action="/urls/<%= id %>">
+					<h3 class="card-title">Edit</h3>
+					<label for="longURL">New URL :</label>
+					<input name="longURL" id="longURL" placeholder="http://" style="width: 300px; margin: 1em" autocomplete="off" />
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 			</div>
