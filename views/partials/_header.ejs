@@ -18,9 +18,26 @@
 				<a class="nav-item nav-link" href="/urls/new">Create New URL</a>
 			</div>
 		</div>
-		<form method="" action="">
+		<form method="POST" action="/login">
 			<div class="input-group">
-				<input name="username" placeholder="Username" type="text" class="form-control" style="margin-right: 10px" />
+				<input
+					name="username"
+					id="username"
+					autocomplete="off"
+					placeholder="Username"
+					type="text"
+					class="form-control"
+					style="margin-right: 10px"
+				/>
+				<input
+					name="password"
+					id="password"
+					autocomplete="off"
+					placeholder="password"
+					type="password"
+					class="form-control"
+					style="margin-right: 10px"
+				/>
 				<button type="submit" class="btn btn-outline-dark">Login</button>
 			</div>
 		</form>

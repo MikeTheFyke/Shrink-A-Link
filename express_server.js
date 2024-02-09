@@ -40,6 +40,14 @@ app.get("/", (req, res) => {
 // 	res.redirect("https://" + urlDatabase[req.body.id]);
 // });
 
+app.post("/login", (req, res) => {
+	res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+	res.cookie("name", req.body.username, {
+		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+	});
+	res.redirect("urls");
+});
+
 app.get("/urls", (req, res) => {
 	const templateVars = { urls: urlDatabase };
 	res.render("urls_index", templateVars);
