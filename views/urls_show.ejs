@@ -19,7 +19,12 @@
 				<h5 class="card-title">Shrunk-Link for: <a target="_blank" href="<%= longURL %>"><%= longURL %></a></h5>
 				<p class="card-text">Shrunk URL ID: <a target="_blank" href="<%= longURL %>"><%= id %></a></p>
 			</div>
-			<div class="card-footer text-muted"></div>
+			<div class="card-footer text-muted">
+				<form method="POST" action="/urls/<=% id %>">
+					<input />
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
 		</div>
 		<!-- Bootstrap JS -->
 		<script
