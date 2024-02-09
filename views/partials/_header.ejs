@@ -18,6 +18,12 @@
 				<a class="nav-item nav-link" href="/urls/new">Create New URL</a>
 			</div>
 		</div>
+		<% if (username) { %>
+		<h5>Logged in as: <%= username %></h5>
+		<form method="POST" action="/logout">
+			<button type="submit" class="btn btn-outline-dark" style="margin-left: 10px">Logout</button>
+		</form>
+		<% } else { %>
 		<form method="POST" action="/login">
 			<div class="input-group">
 				<input
@@ -41,5 +47,6 @@
 				<button type="submit" class="btn btn-outline-dark">Login</button>
 			</div>
 		</form>
+		<% } %>
 	</nav>
 </header>
