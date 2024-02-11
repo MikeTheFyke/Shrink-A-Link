@@ -48,6 +48,15 @@ const findSelectedUser = (id) => {
 	}
 };
 
+const verifyEmail = (email) => {
+	for (id in users) {
+		if (email === users[id].email) {
+			return false;
+		}
+	}
+	return true;
+};
+
 app.set("view engine", "ejs");
 app.use(cookieParser());
 // urlencoded converts the request body from a Buffer to a string,
@@ -87,19 +96,25 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-	const userID = generateRandomString();
-	users = {
-		...users,
-		user3RandomID: {
-			id: userID,
-			email: req.body.email,
-			password: req.body.password,
-		},
-	};
-	res.cookie("user_id", userID, {
-		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
-	});
-	res.redirect("urls");
+	if (req.body.email == "" || req.body.password == "") {
+		res.status(400).send("No empty strings");
+	} else if (verifyEmail(req.body.email)) {
+		const userID = generateRandomString();
+		users = {
+			...users,
+			user3RandomID: {
+				id: userID,
+				email: req.body.email,
+				password: req.body.password,
+			},
+		};
+		res.cookie("user_id", userID, {
+			expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+		});
+		res.redirect("urls");
+	} else {
+		res.status(400).send("Email already exists");
+	}
 });
 
 app.get("/urls", (req, res) => {
