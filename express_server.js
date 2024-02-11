@@ -75,7 +75,7 @@ app.post("/logout", (req, res) => {
 	res.clearCookie("user_id", req.cookies.user_id, {
 		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
 	});
-	res.redirect("urls");
+	res.redirect("register");
 });
 
 app.get("/register", (req, res) => {
