@@ -75,7 +75,6 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
 	const templateVars = {
 		user: findSelectedUser(req.cookies.user_id),
-		urls: urlDatabase,
 	};
 	res.render("login", templateVars);
 });
