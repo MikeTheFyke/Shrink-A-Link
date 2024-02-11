@@ -5,3 +5,5 @@ nodemon express_server
 - Express
 - Nodemon
 - EJS
+- cookie-parser
+- lodash
