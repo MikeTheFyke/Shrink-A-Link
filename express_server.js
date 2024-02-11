@@ -72,6 +72,14 @@ app.get("/", (req, res) => {
 // 	res.redirect("https://" + urlDatabase[req.body.id]);
 // });
 
+app.get("/login", (req, res) => {
+	const templateVars = {
+		user: findSelectedUser(req.cookies.user_id),
+		urls: urlDatabase,
+	};
+	res.render("login", templateVars);
+});
+
 app.post("/login", (req, res) => {
 	res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 	res.cookie("username", req.body.username, {
