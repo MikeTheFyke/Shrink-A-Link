@@ -1,5 +1,5 @@
 <header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-success">
+	<nav class="navbar navbar-expand-md navbar-dark bg-success" style="display: flex; justify-content: space-between">
 		<a class="navbar-brand" href="/urls">Shrink-A-Link</a>
 		<button
 			class="navbar-toggler"
@@ -12,13 +12,14 @@
 		>
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		<% if (user) { %>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link" href="/urls">My URLs</a>
 				<a class="nav-item nav-link" href="/urls/new">Create New URL</a>
 			</div>
 		</div>
-		<% if (user) { %>
+		<% } %> <% if (user) { %>
 		<div class="navbar-nav">
 			<span>Logged in as: <%= user.email %></span>
 		</div>
@@ -26,19 +27,21 @@
 			<button type="submit" class="btn btn-dark" style="margin-left: 10px">Logout</button>
 		</form>
 		<% } else { %>
-		<div class="navbar-nav" style="margin-right: 10px">
-			<span>Not a member yet?</span>
+		<div id="right-nav" class="navbar-nav">
+			<div style="margin-right: 10px; padding-top: 5px">
+				<span>Not a member yet?</span>
+			</div>
+			<form method="GET" action="/register">
+				<div class="input-group" style="margin-right: 10px">
+					<button type="submit" class="btn btn-outline-dark">Register</button>
+				</div>
+			</form>
+			<form method="GET" action="/login">
+				<div class="input-group">
+					<button type="submit" class="btn btn-outline-dark">Login</button>
+				</div>
+			</form>
 		</div>
-		<form method="GET" action="/register">
-			<div class="input-group" style="margin-right: 10px">
-				<button type="submit" class="btn btn-outline-dark">Register</button>
-			</div>
-		</form>
-		<form method="GET" action="/login">
-			<div class="input-group">
-				<button type="submit" class="btn btn-outline-dark">Login</button>
-			</div>
-		</form>
 		<% } %>
 	</nav>
 </header>

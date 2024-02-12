@@ -160,6 +160,9 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
+	if (!req.cookies.user_id) {
+		res.redirect("login");
+	}
 	const templateVars = {
 		user: findSelectedUserID(req.cookies.user_id),
 		urls: urlDatabase,
@@ -173,6 +176,9 @@ app.get("/urls.json", (req, res) => {
 });
 
 app.get("/urls/new", (req, res) => {
+	if (!req.cookies.user_id) {
+		res.redirect("/login");
+	}
 	const templateVars = {
 		user: findSelectedUserID(req.cookies.user_id),
 	};
