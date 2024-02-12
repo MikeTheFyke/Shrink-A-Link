@@ -57,6 +57,17 @@ const verifyEmail = (email) => {
 	return true;
 };
 
+const validateLogin = (currentUser) => {
+	for (let i in users) {
+		if (users[i].email === currentUser.email) {
+			if (user[i].password === currentUser.password) {
+				return true;
+			}
+		}
+	}
+	return false;
+};
+
 app.set("view engine", "ejs");
 app.use(cookieParser());
 // urlencoded converts the request body from a Buffer to a string,
@@ -75,16 +86,28 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
 	const templateVars = {
 		user: findSelectedUser(req.cookies.user_id),
+		error: { code: undefined, message: undefined },
 	};
+	console.log("Login User : ", templateVars.user);
 	res.render("login", templateVars);
 });
 
 app.post("/login", (req, res) => {
-	res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-	res.cookie("username", req.body.username, {
-		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
-	});
-	res.redirect("urls");
+	if (validateLogin(req.body)) {
+		res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+		res.cookie("user_id", req.cookies.user_id, {
+			expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+		});
+		res.redirect("urls");
+	} else {
+		const templateVars = {
+			urls: urlDatabase,
+			user: undefined,
+			error: { code: 403, message: "Sorry user does not exist. Please try again or " },
+		};
+		res.status(403);
+		res.render("login", templateVars);
+	}
 });
 
 app.post("/logout", (req, res) => {

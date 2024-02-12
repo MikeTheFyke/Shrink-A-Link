@@ -12,13 +12,15 @@
 	</head>
 
 	<body>
-		<%- include('partials/_header') %>
+		<%- include('partials/_header') %> <% if (error.code) { %>
+		<div style="background-color: red; color: white; text-align: center"><%= error.message %><a href="/register">register.</a></div>
+		<% } %>
 		<div class="card text-center">
 			<div class="card-header"></div>
 			<div class="card-body">
 				<form method="POST" action="/login">
 					<div class="input-group" style="width: 50%; margin-left: 25%; margin-bottom: 10px">
-						<input name="username" id="username" autocomplete="off" placeholder="Username" type="text" class="form-control" />
+						<input name="email" id="email" autocomplete="off" placeholder="Email" type="text" class="form-control" />
 					</div>
 					<div class="input-group" style="width: 50%; margin-left: 25%; margin-bottom: 10px">
 						<input name="password" id="password" autocomplete="off" placeholder="Password" type="password" class="form-control" />
@@ -45,8 +47,5 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"
 		></script>
-		<script>
-			console.log("You are here : ");
-		</script>
 	</body>
 </html>
