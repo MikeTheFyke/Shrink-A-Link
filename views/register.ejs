@@ -12,7 +12,14 @@
 	</head>
 
 	<body>
-		<%- include('partials/_header') %>
+		<%- include('partials/_header') %> <% if (error.code) { %>
+		<div id="error-banner" style="background-color: #dc3545; color: white; height: 25px; width: 100%; display: inline-flex">
+			<a onclick="document.getElementById('error-banner').style.display = 'none'" style="margin-left: 14px; width: 20px; cursor: pointer"
+				>X</a
+			>
+			<div style="width: 100%; text-align: center"><%= error.message %></div>
+		</div>
+		<% } %>
 		<div class="card text-center">
 			<div class="card-header"></div>
 			<div class="card-body">

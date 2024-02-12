@@ -129,14 +129,13 @@ app.get("/register", (req, res) => {
 	const templateVars = {
 		user: findSelectedUserID(req.cookies.user_id),
 		urls: urlDatabase,
+		error: { code: undefined, message: undefined },
 	};
 	res.render("register", templateVars);
 });
 
 app.post("/register", (req, res) => {
-	if (req.body.email == "" || req.body.password == "") {
-		res.status(400).send("No empty strings");
-	} else if (findSelectedUserEmail(req.body.email)) {
+	if (findSelectedUserEmail(req.body.email)) {
 		const userID = generateRandomString();
 		users = {
 			...users,
@@ -151,7 +150,12 @@ app.post("/register", (req, res) => {
 		});
 		res.redirect("urls");
 	} else {
-		res.status(400).send("Email already exists");
+		const templateVars = {
+			user: undefined,
+			urls: urlDatabase,
+			error: { code: 400, message: "Sorry this email already exists" },
+		};
+		res.render("register", templateVars);
 	}
 });
 
