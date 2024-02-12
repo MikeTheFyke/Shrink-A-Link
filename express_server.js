@@ -192,6 +192,9 @@ app.post("/urls", (req, res) => {
 });
 
 app.get("/urls/:id", (req, res) => {
+	if (!req.cookies.user_id) {
+		res.redirect("/login");
+	}
 	const templateVars = {
 		user: findSelectedUserID(req.cookies.user_id),
 		id: req.params.id,
