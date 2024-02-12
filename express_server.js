@@ -20,8 +20,8 @@ let users = {
 	},
 	user2RandomID: {
 		id: "user2RandomID",
-		email: "user2@example.com",
-		password: "dishwasher-funk",
+		email: "test@test.com",
+		password: "test",
 	},
 };
 
@@ -40,7 +40,7 @@ const formatURL = (url) => {
 	}
 };
 
-const findSelectedUser = (id) => {
+const findSelectedUserID = (id) => {
 	for (let i in users) {
 		if (users[i].id === id) {
 			return users[i];
@@ -48,7 +48,7 @@ const findSelectedUser = (id) => {
 	}
 };
 
-const verifyEmail = (email) => {
+const findSelectedUserEmail = (email) => {
 	for (id in users) {
 		if (email === users[id].email) {
 			return false;
@@ -60,12 +60,20 @@ const verifyEmail = (email) => {
 const validateLogin = (currentUser) => {
 	for (let i in users) {
 		if (users[i].email === currentUser.email) {
-			if (user[i].password === currentUser.password) {
-				return true;
+			if (users[i].password === currentUser.password) {
+				return { validated: true, user: users[i], error: { code: undefined, message: undefined } };
+			} else {
+				return {
+					validated: false,
+					error: { code: 403, message: "Password entered is incorrect. Please try again or " },
+				};
 			}
 		}
 	}
-	return false;
+	return {
+		validated: false,
+		error: { code: 403, message: "Email does not exist. Please try again or " },
+	};
 };
 
 app.set("view engine", "ejs");
@@ -78,32 +86,32 @@ app.get("/", (req, res) => {
 	res.send("Hello!");
 });
 
-// app.get("/u/:id", (req, res) => {
-// 	console.log("Req : ", req.body.id);
-// 	res.redirect("https://" + urlDatabase[req.body.id]);
-// });
-
 app.get("/login", (req, res) => {
 	const templateVars = {
-		user: findSelectedUser(req.cookies.user_id),
+		user: findSelectedUserID(req.cookies.user_id),
 		error: { code: undefined, message: undefined },
 	};
-	console.log("Login User : ", templateVars.user);
 	res.render("login", templateVars);
 });
 
 app.post("/login", (req, res) => {
-	if (validateLogin(req.body)) {
+	const validatedUser = validateLogin(req.body);
+	if (validatedUser.validated) {
+		const templateVars = {
+			urls: urlDatabase,
+			user: validatedUser.user,
+			error: validatedUser.error,
+		};
 		res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-		res.cookie("user_id", req.cookies.user_id, {
+		res.cookie("user_id", validatedUser.user.id, {
 			expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
 		});
-		res.redirect("urls");
+		res.render("urls_index", templateVars);
 	} else {
 		const templateVars = {
 			urls: urlDatabase,
 			user: undefined,
-			error: { code: 403, message: "Sorry user does not exist. Please try again or " },
+			error: validatedUser.error,
 		};
 		res.status(403);
 		res.render("login", templateVars);
@@ -112,14 +120,14 @@ app.post("/login", (req, res) => {
 
 app.post("/logout", (req, res) => {
 	res.clearCookie("user_id", req.cookies.user_id, {
-		expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+		expires: new Date(Date.now() + 8 * 3600000),
 	});
-	res.redirect("register");
+	res.redirect("login");
 });
 
 app.get("/register", (req, res) => {
 	const templateVars = {
-		user: findSelectedUser(req.cookies.user_id),
+		user: findSelectedUserID(req.cookies.user_id),
 		urls: urlDatabase,
 	};
 	res.render("register", templateVars);
@@ -128,7 +136,7 @@ app.get("/register", (req, res) => {
 app.post("/register", (req, res) => {
 	if (req.body.email == "" || req.body.password == "") {
 		res.status(400).send("No empty strings");
-	} else if (verifyEmail(req.body.email)) {
+	} else if (findSelectedUserEmail(req.body.email)) {
 		const userID = generateRandomString();
 		users = {
 			...users,
@@ -149,8 +157,9 @@ app.post("/register", (req, res) => {
 
 app.get("/urls", (req, res) => {
 	const templateVars = {
-		user: findSelectedUser(req.cookies.user_id),
+		user: findSelectedUserID(req.cookies.user_id),
 		urls: urlDatabase,
+		error: { code: undefined, message: undefined },
 	};
 	res.render("urls_index", templateVars);
 });
@@ -161,7 +170,7 @@ app.get("/urls.json", (req, res) => {
 
 app.get("/urls/new", (req, res) => {
 	const templateVars = {
-		user: findSelectedUser(req.cookies.user_id),
+		user: findSelectedUserID(req.cookies.user_id),
 	};
 	res.render("urls_new", templateVars);
 });
@@ -174,7 +183,7 @@ app.post("/urls", (req, res) => {
 
 app.get("/urls/:id", (req, res) => {
 	const templateVars = {
-		user: findSelectedUser(req.cookies.user_id),
+		user: findSelectedUserID(req.cookies.user_id),
 		id: req.params.id,
 		longURL: urlDatabase[req.params.id],
 	};
