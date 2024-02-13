@@ -13,10 +13,20 @@
 
 	<body>
 		<%- include('partials/_header') %> <% if (error.code) { %>
-		<div id="error-banner" style="background-color: #dc3545; color: white; height: 25px; width: 100%; display: inline-flex">
-			<a onclick="document.getElementById('error-banner').style.display = 'none'" style="margin-left: 14px; width: 20px; cursor: pointer"
-				>X</a
-			>
+		<div
+			id="error-banner"
+			style="
+				background-color: #dc3545;
+				color: white;
+				height: 25px;
+				width: 100%;
+				display: inline-flex;
+				position: absolute;
+				top: 56px;
+				z-index: 10;
+			"
+		>
+			<a id="close-button" style="margin-left: 14px; width: 20px; cursor: pointer">X</a>
 			<div style="width: 100%; text-align: center"><%= error.message %></div>
 		</div>
 		<% } %>
@@ -60,8 +70,11 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"
 		></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script>
-			console.log("You are here : ");
+			$("#close-button").click(function () {
+				$("#error-banner").slideUp("slow");
+			});
 		</script>
 	</body>
 </html>

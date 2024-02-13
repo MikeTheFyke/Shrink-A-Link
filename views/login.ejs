@@ -13,7 +13,22 @@
 
 	<body>
 		<%- include('partials/_header') %> <% if (error.code) { %>
-		<div style="background-color: #dc3545; color: white; text-align: center"><%= error.message %><a href="/register">register.</a></div>
+		<div
+			id="error-banner"
+			style="
+				background-color: #dc3545;
+				color: white;
+				height: 25px;
+				width: 100%;
+				display: inline-flex;
+				position: absolute;
+				top: 56px;
+				z-index: 10;
+			"
+		>
+			<a id="close-button" style="margin-left: 14px; width: 20px; cursor: pointer">X</a>
+			<div style="width: 100%; text-align: center"><%= error.message %><a href="/register" style="margin-left: 2px">register.</a></div>
+		</div>
 		<% } %>
 		<div class="card text-center">
 			<div class="card-header"></div>
@@ -47,5 +62,12 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"
 		></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script>
+			$("#close-button").click(function () {
+				console.log("Clicked");
+				$("#error-banner").slideUp("slow");
+			});
+		</script>
 	</body>
 </html>
