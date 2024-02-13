@@ -1,9 +1,9 @@
 <header>
 	<nav class="navbar navbar-expand-md navbar-dark bg-info" style="display: flex; justify-content: space-between">
 		<% if (user) { %>
-		<a class="navbar-brand" href="/urls">Shrink-A-Link</a>
+		<a class="navbar-brand" href="/urls"><%= dictionary.shrinkALink %></a>
 		<% } else { %>
-		<a class="navbar-brand" style="color: white">Shrink-A-Link</a>
+		<a class="navbar-brand" style="color: white"><%= dictionary.shrinkALink %></a>
 		<% } %>
 		<button
 			class="navbar-toggler"
@@ -19,16 +19,16 @@
 		<% if (user) { %>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="/urls">Your URLs</a>
-				<a class="nav-item nav-link" href="/urls/new">Create New URL</a>
+				<a class="nav-item nav-link" href="/urls"><%= dictionary.navLinks.urls %></a>
+				<a class="nav-item nav-link" href="/urls/new"><%= dictionary.navLinks.urlsNew %></a>
 			</div>
 		</div>
 		<% } %> <% if (user) { %>
 		<div class="navbar-nav">
-			<span>Logged in as: <%= user.email %></span>
+			<span style="color: white"><%= dictionary.welcome %> <%= user.username %> !</span>
 		</div>
 		<form method="POST" action="/logout">
-			<button type="submit" class="btn btn-dark" style="margin-left: 10px">Logout</button>
+			<button type="submit" class="btn btn-dark" style="margin-left: 10px"><%= dictionary.logout %></button>
 		</form>
 		<% } else { %>
 		<div id="right-nav" class="navbar-nav">
@@ -37,12 +37,12 @@
 			</div>
 			<form method="GET" action="/register">
 				<div class="input-group" style="margin-right: 10px">
-					<button type="submit" class="btn btn-outline-light">Register</button>
+					<button type="submit" class="btn btn-outline-light"><%= dictionary.register %></button>
 				</div>
 			</form>
 			<form method="GET" action="/login">
 				<div class="input-group">
-					<button type="submit" class="btn btn-outline-light">Login</button>
+					<button type="submit" class="btn btn-outline-light"><%= dictionary.login %></button>
 				</div>
 			</form>
 		</div>

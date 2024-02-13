@@ -1,3 +1,4 @@
+const dictionary = require("./dictionary.js");
 const express = require("express");
 const app = express();
 const PORT = 8080; // default port 8080
@@ -15,6 +16,7 @@ let urlDatabase = {
 let users = {
 	testUserID: {
 		id: "testUserID",
+		username: "Testee",
 		email: "test@test.com",
 		password: "test",
 	},
@@ -54,20 +56,20 @@ const findSelectedUserEmail = (email) => {
 
 const validateLogin = (currentUser) => {
 	for (let i in users) {
-		if (users[i].email === currentUser.email) {
+		if (users[i].userLogin === currentUser.email || users[i].userLogin === currentUser.username) {
 			if (users[i].password === currentUser.password) {
 				return { validated: true, user: users[i], error: { code: undefined, message: undefined } };
 			} else {
 				return {
 					validated: false,
-					error: { code: 403, message: "Password entered is incorrect. Please try again or " },
+					error: { code: 403, message: dictionary.errorMessage.incorrectPassword },
 				};
 			}
 		}
 	}
 	return {
 		validated: false,
-		error: { code: 403, message: "Email does not exist. Please try again or " },
+		error: { code: 403, message: dictionary.errorMessage.emailUsernameDoesNot },
 	};
 };
 
@@ -78,7 +80,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-	res.send("Hello!");
+	res.redirect("login");
 });
 
 app.get("/login", (req, res) => {
@@ -96,6 +98,7 @@ app.post("/login", (req, res) => {
 			urls: urlDatabase,
 			user: validatedUser.user,
 			error: validatedUser.error,
+			dictionary: dictionary,
 		};
 		res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 		res.cookie("user_id", validatedUser.user.id, {
@@ -107,6 +110,7 @@ app.post("/login", (req, res) => {
 			urls: urlDatabase,
 			user: undefined,
 			error: validatedUser.error,
+			dictionary: dictionary,
 		};
 		res.status(403);
 		res.render("login", templateVars);
@@ -125,6 +129,7 @@ app.get("/register", (req, res) => {
 		user: findSelectedUserID(req.cookies.user_id),
 		urls: urlDatabase,
 		error: { code: undefined, message: undefined },
+		dictionary: dictionary,
 	};
 	res.render("register", templateVars);
 });
@@ -134,8 +139,9 @@ app.post("/register", (req, res) => {
 		const userID = generateRandomString();
 		users = {
 			...users,
-			user3RandomID: {
+			userID: {
 				id: userID,
+				username: req.body.username,
 				email: req.body.email,
 				password: req.body.password,
 			},
@@ -148,7 +154,7 @@ app.post("/register", (req, res) => {
 		const templateVars = {
 			user: undefined,
 			urls: urlDatabase,
-			error: { code: 400, message: "Sorry this email already exists" },
+			error: { code: 400, message: dictionary.errorMessage.emailUsernameDoesAlready },
 		};
 		res.render("register", templateVars);
 	}
@@ -162,6 +168,7 @@ app.get("/urls", (req, res) => {
 		user: findSelectedUserID(req.cookies.user_id),
 		urls: urlDatabase,
 		error: { code: undefined, message: undefined },
+		dictionary: dictionary,
 	};
 	res.render("urls_index", templateVars);
 });
@@ -182,6 +189,7 @@ app.get("/urls/new", (req, res) => {
 	}
 	const templateVars = {
 		user: findSelectedUserID(req.cookies.user_id),
+		dictionary: dictionary,
 	};
 	res.render("urls_new", templateVars);
 });
@@ -194,6 +202,7 @@ app.get("/urls/:id", (req, res) => {
 		user: findSelectedUserID(req.cookies.user_id),
 		id: req.params.id,
 		longURL: urlDatabase[req.params.id],
+		dictionary: dictionary,
 	};
 	res.render("urls_show", templateVars);
 });
