@@ -95,17 +95,11 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
 	const validatedUser = validateLogin(req.body);
 	if (validatedUser.validated) {
-		const templateVars = {
-			urls: urlDatabase,
-			user: validatedUser.user,
-			error: validatedUser.error,
-			dictionary: dictionary,
-		};
 		res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 		res.cookie("user_id", validatedUser.user.id, {
 			expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
 		});
-		res.render("urls_index", templateVars);
+		res.redirect("urls");
 	} else {
 		const templateVars = {
 			urls: urlDatabase,
