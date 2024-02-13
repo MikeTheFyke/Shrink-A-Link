@@ -1,24 +1,15 @@
 <header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-info" style="display: flex; justify-content: space-between; max-height: 58px">
+	<div style="display: flex; justify-content: space-between; max-height: 58px; background-color: #17a2b8; padding: 8px 14px">
 		<% if (user) { %>
-		<a class="navbar-brand" href="/urls"><%= dictionary.common.shrinkALink %></a>
+		<div style="min-width: 300px; margin-right: 0px; display: flex; justify-content: space-between">
+			<a class="navbar-brand" href="/urls" style="color: white"><%= dictionary.common.shrinkALink %></a>
+			<a class="nav-item nav-link" href="/urls/new" style="padding-left: 0px"><%= dictionary.navLinks.urlsNew %></a>
+		</div>
 		<% } else { %>
 		<a class="navbar-brand" style="color: white"><%= dictionary.common.shrinkALink %></a>
-		<% } %>
-		<!-- <% if (user) { %>
-		<div id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="/urls"><%= dictionary.navLinks.urls %></a>
-				<a class="nav-item nav-link" href="/urls/new"><%= dictionary.navLinks.urlsNew %></a>
-			</div>
-		</div>
-		<% } %>  -->
-		<% if (user) { %>
-		<div id="right-nav" class="navbar-nav" style="min-width: 171px; white-space: nowrap; overflow: hidden">
-			<form method="POST" action="/logout">
-				<span style="color: white"><%= dictionary.common.welcome %> <%= user.username %> !</span>
-				<button type="submit" class="btn btn-dark" style="margin-left: 10px" label=""><%= dictionary.common.logout %></button>
-			</form>
+		<% } %> <% if (user) { %>
+		<div id="right-nav" class="navbar-nav" style="min-width: 200px; white-space: nowrap; overflow: hidden; text-align: end">
+			<span style="color: white; padding-top: 8px"><%= dictionary.common.welcome %> <%= user.username %> !</span>
 		</div>
 		<% } else { %>
 		<div id="right-nav" class="navbar-nav" style="min-width: 171px; white-space: nowrap">
@@ -37,5 +28,24 @@
 			</form>
 		</div>
 		<% } %>
-	</nav>
+	</div>
 </header>
+<% if (user) { %>
+<div
+	style="
+		position: absolute;
+		right: 0px;
+		top: 56px;
+		width: 90px;
+		height: 40px;
+		background-color: #17a2b8;
+		text-align: end;
+		border-bottom-left-radius: 10px;
+		padding-right: 14px;
+	"
+>
+	<form method="POST" action="/logout">
+		<button type="submit" class="btn btn-dark btn-sm"><%= dictionary.common.logout %></button>
+	</form>
+</div>
+<% } %>
