@@ -12,9 +12,9 @@
 			<span style="color: white; padding-top: 8px"><%= dictionary.common.welcome %> <%= user.username %> !</span>
 		</div>
 		<% } else { %>
-		<div id="right-nav" class="navbar-nav" style="min-width: 171px; white-space: nowrap">
+		<div id="right-nav" style="min-width: 200px; display: flex; justify-content: space-between">
 			<div style="margin-right: 10px; padding-top: 7px">
-				<span><%= dictionary.notAMember %></span>
+				<span style="color: white"><%= dictionary.common.notAMember %></span>
 			</div>
 			<form method="GET" action="/register">
 				<div class="input-group" style="margin-right: 10px">
