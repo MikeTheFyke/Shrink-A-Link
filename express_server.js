@@ -87,6 +87,7 @@ app.get("/login", (req, res) => {
 	const templateVars = {
 		user: findSelectedUserID(req.cookies.user_id),
 		error: { code: undefined, message: undefined },
+		dictionary: dictionary,
 	};
 	res.render("login", templateVars);
 });

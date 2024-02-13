@@ -1,9 +1,12 @@
 module.exports = {
-	logout: "Logout",
-	login: "Login",
-	register: "Register",
-	shrinkALink: "Shrink-A-Link",
-	welcome: "Welcome back ",
+	common: {
+		logout: "Logout",
+		login: "Login",
+		register: "Register",
+		shrinkALink: "Shrink-A-Link",
+		welcome: "Welcome back ",
+		notAMember: "Not a member yet?",
+	},
 	navLinks: {
 		urls: "Your URLS",
 		urlsNew: "Create A New URL",

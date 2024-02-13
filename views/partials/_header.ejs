@@ -1,9 +1,9 @@
 <header>
 	<nav class="navbar navbar-expand-md navbar-dark bg-info" style="display: flex; justify-content: space-between">
 		<% if (user) { %>
-		<a class="navbar-brand" href="/urls"><%= dictionary.shrinkALink %></a>
+		<a class="navbar-brand" href="/urls"><%= dictionary.common.shrinkALink %></a>
 		<% } else { %>
-		<a class="navbar-brand" style="color: white"><%= dictionary.shrinkALink %></a>
+		<a class="navbar-brand" style="color: white"><%= dictionary.common.shrinkALink %></a>
 		<% } %>
 		<button
 			class="navbar-toggler"
@@ -25,24 +25,24 @@
 		</div>
 		<% } %> <% if (user) { %>
 		<div class="navbar-nav">
-			<span style="color: white"><%= dictionary.welcome %> <%= user.username %> !</span>
+			<span style="color: white"><%= dictionary.common.welcome %> <%= user.username %> !</span>
 		</div>
 		<form method="POST" action="/logout">
-			<button type="submit" class="btn btn-dark" style="margin-left: 10px"><%= dictionary.logout %></button>
+			<button type="submit" class="btn btn-dark" style="margin-left: 10px" label=""><%= dictionary.common.logout %></button>
 		</form>
 		<% } else { %>
 		<div id="right-nav" class="navbar-nav">
 			<div style="margin-right: 10px; padding-top: 7px">
-				<span>Not a member yet?</span>
+				<span><%= dictionary.notAMember %></span>
 			</div>
 			<form method="GET" action="/register">
 				<div class="input-group" style="margin-right: 10px">
-					<button type="submit" class="btn btn-outline-light"><%= dictionary.register %></button>
+					<button type="submit" class="btn btn-outline-light"><%= dictionary.common.register %></button>
 				</div>
 			</form>
 			<form method="GET" action="/login">
 				<div class="input-group">
-					<button type="submit" class="btn btn-outline-light"><%= dictionary.login %></button>
+					<button type="submit" class="btn btn-outline-light"><%= dictionary.common.login %></button>
 				</div>
 			</form>
 		</div>
