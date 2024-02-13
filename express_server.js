@@ -13,13 +13,8 @@ let urlDatabase = {
 };
 
 let users = {
-	userRandomID: {
-		id: "userRandomID",
-		email: "user@example.com",
-		password: "purple-monkey-dinosaur",
-	},
-	user2RandomID: {
-		id: "user2RandomID",
+	testUserID: {
+		id: "testUserID",
 		email: "test@test.com",
 		password: "test",
 	},

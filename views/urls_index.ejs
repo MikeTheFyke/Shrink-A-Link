@@ -15,12 +15,12 @@
 	</head>
 	<body>
 		<%- include('partials/_header') %>
-		<main style="margin: 1em">
-			<h3>My URLs</h3>
-			<table class="table">
+		<main style="margin: 1em 0 1em 0">
+			<h3 style="padding-left: 14px">Your Links</h3>
+			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th scope="col">Short URL ID</th>
+						<th scope="col" style="padding-left: 14px">Short URL</th>
 						<th scope="col">Long URL</th>
 						<th scope="col"></th>
 					</tr>
@@ -29,8 +29,8 @@
 					<% for (let id in urls) { %>
 					<tr>
 						<form method="POST" action="/urls/<%= id %>/delete">
-							<td><%= id %></td>
-							<td><a target="_blank" href="<%= urls[id] %>"><%= urls[id] %></a></td>
+							<td style="padding-left: 14px; padding-top: 18px"><a target="_blank" href="<%= urls[id] %>"><%= id %></a></td>
+							<td style="padding-top: 18px"><a target="_blank" href="<%= urls[id] %>"><%= urls[id] %></a></td>
 							<td>
 								<button type="button" class="btn btn-info">
 									<a href="/urls/<%= id %>" style="text-decoration: none; color: white">Edit</a>
