@@ -8,3 +8,4 @@ To start express server on localhost:8080 use
 - Nodemon
 - EJS
 - cookie-parser
+- JQuery
