@@ -12,16 +12,16 @@
 			crossorigin="anonymous"
 		/>
 
-		<title>New URL - Shrink-A-Link Example</title>
+		<title><%= dictionary.common.shrinkALink %></title>
 	</head>
 
 	<body>
 		<%- include('partials/_header') %>
 		<main style="margin: 1em">
-			<h3>Create A ShrinkLink</h3>
+			<h3><%= dictionary.common.createALink %></h3>
 			<form class="form-inline" action="/urls" method="POST">
 				<div class="form-group mb-2">
-					<label for="longURL">Enter a URL:</label>
+					<label for="longURL"><%= dictionary.common.enterALink %></label>
 					<input
 						class="form-control"
 						type="text"
@@ -31,7 +31,7 @@
 						style="width: 300px; margin: 1em"
 						autocomplete="off"
 					/>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary"><%= dictionary.common.submit %></button>
 				</div>
 			</form>
 		</main>

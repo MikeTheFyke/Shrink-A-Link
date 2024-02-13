@@ -11,7 +11,7 @@
 			integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 			crossorigin="anonymous"
 		/>
-		<title>Shrink-A-Link</title>
+		<title><%= dictionary.common.shrinkALink %></title>
 	</head>
 	<body>
 		<%- include('partials/_header') %>
@@ -19,13 +19,13 @@
 			<h3
 				style="padding-left: 14px; background-color: #17a2b8; color: white; width: 150px; border-top-right-radius: 10px; margin-bottom: 0"
 			>
-				Your Links
+				<%= dictionary.common.yourLinks %>
 			</h3>
 			<table class="table table-striped" style="table-layout: fixed">
 				<thead>
 					<tr>
-						<th scope="col" style="width: 20%">Short URL</th>
-						<th scope="col" style="max-width: 300px">Long URL</th>
+						<th scope="col" style="width: 20%"><%= dictionary.common.shortURL %></th>
+						<th scope="col" style="max-width: 300px"><%= dictionary.common.longURL %></th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -41,9 +41,9 @@
 							</td>
 							<td>
 								<button type="button" class="btn btn-info">
-									<a href="/urls/<%= id %>" style="text-decoration: none; color: white">Edit</a>
+									<a href="/urls/<%= id %>" style="text-decoration: none; color: white"><%= dictionary.common.edit %></a>
 								</button>
-								<button type="submit" class="btn btn-danger">Delete</button>
+								<button type="submit" class="btn btn-danger"><%= dictionary.common.delete %></button>
 							</td>
 						</form>
 					</tr>

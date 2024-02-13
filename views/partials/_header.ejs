@@ -1,37 +1,27 @@
 <header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-info" style="display: flex; justify-content: space-between">
+	<nav class="navbar navbar-expand-md navbar-dark bg-info" style="display: flex; justify-content: space-between; max-height: 58px">
 		<% if (user) { %>
 		<a class="navbar-brand" href="/urls"><%= dictionary.common.shrinkALink %></a>
 		<% } else { %>
 		<a class="navbar-brand" style="color: white"><%= dictionary.common.shrinkALink %></a>
 		<% } %>
-		<button
-			class="navbar-toggler"
-			type="button"
-			data-toggle="collapse"
-			data-target="#navbarNavAltMarkup"
-			aria-controls="navbarNavAltMarkup"
-			aria-expanded="false"
-			aria-label="Toggle navigation"
-		>
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<% if (user) { %>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<!-- <% if (user) { %>
+		<div id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link" href="/urls"><%= dictionary.navLinks.urls %></a>
 				<a class="nav-item nav-link" href="/urls/new"><%= dictionary.navLinks.urlsNew %></a>
 			</div>
 		</div>
-		<% } %> <% if (user) { %>
-		<div class="navbar-nav">
-			<span style="color: white"><%= dictionary.common.welcome %> <%= user.username %> !</span>
+		<% } %>  -->
+		<% if (user) { %>
+		<div id="right-nav" class="navbar-nav" style="min-width: 171px; white-space: nowrap; overflow: hidden">
+			<form method="POST" action="/logout">
+				<span style="color: white"><%= dictionary.common.welcome %> <%= user.username %> !</span>
+				<button type="submit" class="btn btn-dark" style="margin-left: 10px" label=""><%= dictionary.common.logout %></button>
+			</form>
 		</div>
-		<form method="POST" action="/logout">
-			<button type="submit" class="btn btn-dark" style="margin-left: 10px" label=""><%= dictionary.common.logout %></button>
-		</form>
 		<% } else { %>
-		<div id="right-nav" class="navbar-nav">
+		<div id="right-nav" class="navbar-nav" style="min-width: 171px; white-space: nowrap">
 			<div style="margin-right: 10px; padding-top: 7px">
 				<span><%= dictionary.notAMember %></span>
 			</div>

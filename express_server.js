@@ -150,6 +150,7 @@ app.post("/register", (req, res) => {
 			user: undefined,
 			urls: urlDatabase,
 			error: { code: 400, message: dictionary.errorMessage.emailUsernameDoesAlready },
+			dictionary: dictionary,
 		};
 		res.render("register", templateVars);
 	}
