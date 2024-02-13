@@ -17,11 +17,11 @@
 		<%- include('partials/_header') %>
 		<main style="margin: 1em 0 1em 0">
 			<h3 style="padding-left: 14px">Your Links</h3>
-			<table class="table table-striped">
+			<table class="table table-striped" style="table-layout: fixed">
 				<thead>
 					<tr>
-						<th scope="col" style="padding-left: 14px">Short URL</th>
-						<th scope="col">Long URL</th>
+						<th scope="col" style="width: 20%">Short URL</th>
+						<th scope="col" style="max-width: 300px">Long URL</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -29,8 +29,12 @@
 					<% for (let id in urls) { %>
 					<tr>
 						<form method="POST" action="/urls/<%= id %>/delete">
-							<td style="padding-left: 14px; padding-top: 18px"><a target="_blank" href="<%= urls[id] %>"><%= id %></a></td>
-							<td style="padding-top: 18px; width: 300px"><a target="_blank" href="<%= urls[id] %>"><%= urls[id] %></a></td>
+							<td style="padding-left: 14px; padding-top: 18px; width: 20%">
+								<a target="_blank" href="<%= urls[id] %>"><%= id %></a>
+							</td>
+							<td style="padding-top: 18px; max-width: 300px; overflow: hidden; text-overflow: ellipsis">
+								<a style="width: 300px" target="_blank" href="<%= urls[id] %>"><%= urls[id] %></a>
+							</td>
 							<td>
 								<button type="button" class="btn btn-info">
 									<a href="/urls/<%= id %>" style="text-decoration: none; color: white">Edit</a>
