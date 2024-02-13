@@ -171,6 +171,12 @@ app.get("/urls", (req, res) => {
 	res.render("urls_index", templateVars);
 });
 
+app.post("/urls", (req, res) => {
+	const newId = generateRandomString();
+	urlDatabase[newId] = formatURL(req.body.longURL);
+	res.redirect(`urls/${newId}`);
+});
+
 app.get("/urls.json", (req, res) => {
 	res.json(urlDatabase);
 });
@@ -183,12 +189,6 @@ app.get("/urls/new", (req, res) => {
 		user: findSelectedUserID(req.cookies.user_id),
 	};
 	res.render("urls_new", templateVars);
-});
-
-app.post("/urls", (req, res) => {
-	const newId = generateRandomString();
-	urlDatabase[newId] = formatURL(req.body.longURL);
-	res.redirect(`urls/${newId}`);
 });
 
 app.get("/urls/:id", (req, res) => {
