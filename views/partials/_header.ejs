@@ -1,19 +1,21 @@
 <header>
-	<div style="display: flex; justify-content: space-between; max-height: 58px; background-color: #17a2b8; padding: 8px 14px">
+	<div id="MainHeaderContainer">
 		<% if (user) { %>
-		<div style="min-width: 300px; margin-right: 0px; display: flex; justify-content: space-between">
-			<a class="navbar-brand" href="/urls" style="color: white"><%= dictionary.common.shrinkALink %></a>
+		<div id="ShrinkALinkHeaderTextContainer">
+			<a class="navbar-brand" href="/urls" id="HeaderText"><%= dictionary.common.shrinkALink %></a>
 		</div>
 		<% } else { %>
-		<a class="navbar-brand" style="color: white"><%= dictionary.common.shrinkALink %></a>
+		<div id="ShrinkALinkHeaderTextContainer">
+			<a class="navbar-brand" id="HeaderText"><%= dictionary.common.shrinkALink %></a>
+		</div>
 		<% } %> <% if (user) { %>
-		<div id="right-nav" class="navbar-nav" style="min-width: 200px; white-space: nowrap; overflow: hidden; text-align: end">
-			<span style="color: white; padding-top: 8px"><%= dictionary.common.welcome %> <%= user.username %> !</span>
+		<div id="MainHeaderUserTextContainer" class="navbar-nav">
+			<span id="MainHeaderUserText"><%= dictionary.common.welcome %> <%= user.username %> !</span>
 		</div>
 		<% } else { %>
-		<div id="right-nav" style="min-width: 200px; display: flex; justify-content: space-between">
-			<div style="margin-right: 10px; padding-top: 7px">
-				<span style="color: white"><%= dictionary.common.notAMember %></span>
+		<div id="MainHeaderNoUserContainer">
+			<div id="MainHeaderNoUserTextContainer">
+				<span id="HeaderText"><%= dictionary.common.notAMember %></span>
 			</div>
 			<form method="GET" action="/register">
 				<div class="input-group" style="margin-right: 10px">
@@ -30,19 +32,7 @@
 	</div>
 </header>
 <% if (user) { %>
-<div
-	style="
-		position: absolute;
-		right: 0px;
-		top: 56px;
-		width: 90px;
-		height: 40px;
-		background-color: #17a2b8;
-		text-align: end;
-		border-bottom-left-radius: 10px;
-		padding-right: 14px;
-	"
->
+<div id="MainHeaderLogoutContainer">
 	<form method="POST" action="/logout">
 		<button type="submit" class="btn btn-dark btn-sm"><%= dictionary.common.logout %></button>
 	</form>

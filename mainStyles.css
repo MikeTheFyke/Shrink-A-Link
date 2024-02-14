@@ -1,0 +1,127 @@
+#MainHeaderContainer {
+	display: flex;
+	justify-content: space-between;
+	max-height: 58px;
+	background-color: #17a2b8;
+	padding: 8px 14px;
+}
+
+#ShrinkALinkHeaderTextContainer {
+	min-width: 300px;
+	margin-right: 0px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#HeaderText {
+	color: white;
+}
+
+#MainHeaderUserTextContainer {
+	min-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: end;
+}
+
+#MainHeaderUserText {
+	color: white;
+	padding-top: 8px;
+}
+
+#MainHeaderNoUserContainer {
+	min-width: 200px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#MainHeaderNoUserTextContainer {
+	margin-right: 10px;
+	padding-top: 7px;
+}
+
+#LinkTableHeader {
+	padding-left: 14px;
+	background-color: #17a2b8;
+	color: white;
+	width: 150px;
+	border-top-right-radius: 10px;
+	margin-bottom: 0;
+}
+
+#MainHeaderLogoutContainer {
+	position: absolute;
+	right: 0px;
+	top: 56px;
+	width: 90px;
+	height: 40px;
+	background-color: #17a2b8;
+	text-align: end;
+	border-bottom-left-radius: 10px;
+	padding-right: 14px;
+}
+
+#LinkTableShrunkLink {
+	padding-left: 14px;
+	padding-top: 18px;
+	width: 20%;
+}
+
+#LinkTableLongLink {
+	padding-top: 18px;
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#CreateLinkFooterContainer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 120px;
+	background-color: #17a2b8;
+}
+#CreateLinkFooterHeader {
+	width: 100%;
+	text-align: center;
+	color: white;
+	font-size: 1.25rem;
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+#CreateLinkFooterFormContainer {
+	width: 50%;
+	height: 40px;
+	margin: auto;
+	border: 0.5px solid white;
+	border-radius: 5px;
+}
+
+#EmptyLinkTextContainer {
+	position: fixed;
+	top: 30%;
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#EmptyLinkText {
+	width: 342px;
+	text-align: center;
+	font-size: 18px;
+	color: #6c757d;
+}
+
+#ErrorBannerContainer {
+	background-color: #dc3545;
+	color: white;
+	height: 25px;
+	width: 100%;
+	display: inline-flex;
+	position: absolute;
+	top: 56px;
+	z-index: 10;
+}
