@@ -13,7 +13,7 @@ module.exports = {
 		yourLinks: "Your Links",
 		shortURL: "Shrunk URL",
 		longURL: "Long URL",
-		createALink: "Create A ShrinkLink",
+		createALink: "Would You Like To Create A ShrinkLink? ",
 		enterALink: "Enter A URL :",
 		newLink: "New URL :",
 		editALink: "Edit Your Link",
