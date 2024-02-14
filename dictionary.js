@@ -21,7 +21,7 @@ module.exports = {
 		confirmDelete: "Are You Sure You Want To Delete This Link?",
 		shrunkURL: "Shrunk URL : ",
 		shrunkLinkFor: "Shrunk-Link for : ",
-		noURLS: "Oh Snap, you do not have any URLs. Maybe we should create some.",
+		noURLS: "Oh no, you do not seem to have any URLs. Maybe we should create some.",
 	},
 	navLinks: {
 		urls: "Your URLS",

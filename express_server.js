@@ -79,6 +79,7 @@ const validateLogin = (currentUser) => {
 };
 
 app.set("view engine", "ejs");
+app.use(express.static("./"));
 app.use(cookieParser());
 // urlencoded converts the request body from a Buffer to a string,
 // which will be avaialble to us in the req.body.
