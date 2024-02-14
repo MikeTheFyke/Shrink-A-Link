@@ -8,6 +8,11 @@ var cookieParser = require("cookie-parser");
 const urlPrefix = "http://";
 const extendedUrlPrefix = "https://";
 
+const actionTypes = [
+	{ actionType: "Edit", class: "btn btn-info", label: dictionary.common.edit },
+	{ actionType: "Delete", class: "btn btn-danger", label: dictionary.common.delete },
+];
+
 let urlDatabase = {
 	b2xVn2: "http://www.lighthouselabs.ca",
 	"9sm5xK": "http://www.google.com",
@@ -88,6 +93,7 @@ app.get("/login", (req, res) => {
 		user: findSelectedUserID(req.cookies.user_id),
 		error: { code: undefined, message: undefined },
 		dictionary: dictionary,
+		actionTypes: actionTypes,
 	};
 	res.render("login", templateVars);
 });
@@ -106,6 +112,7 @@ app.post("/login", (req, res) => {
 			user: undefined,
 			error: validatedUser.error,
 			dictionary: dictionary,
+			actionTypes: actionTypes,
 		};
 		res.status(403);
 		res.render("login", templateVars);
@@ -165,6 +172,7 @@ app.get("/urls", (req, res) => {
 		urls: urlDatabase,
 		error: { code: undefined, message: undefined },
 		dictionary: dictionary,
+		actionTypes: actionTypes,
 	};
 	res.render("urls_index", templateVars);
 });

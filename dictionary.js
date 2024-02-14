@@ -16,6 +16,8 @@ module.exports = {
 		enterALink: "Enter A URL :",
 		newLink: "New URL :",
 		editALink: "Edit Your Link",
+		deleteALink: "Delete your Link",
+		confirmDelete: "Are You Sure You Want To Delete This Link?",
 		shrunkURL: "Shrunk URL : ",
 		shrunkLinkFor: "Shrunk-Link for : ",
 	},

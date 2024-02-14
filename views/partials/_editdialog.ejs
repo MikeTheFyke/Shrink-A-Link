@@ -1,0 +1,167 @@
+<% if (action.actionType === 'Edit') { %>
+<div
+	id="modal-edit-overlay"
+	style="
+		display: none;
+		position: fixed;
+		z-index: -100;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.4);
+	"
+>
+	<dialog
+		data-edit-modal
+		style="width: 360px; height: 300px; border: 0px solid #6c757d; border-radius: 15px; box-shadow: 0 5px 10px #6c757d; padding: 16px 0px"
+	>
+		<div style="display: flex; justify-content: space-between; padding: 0px 16px">
+			<h3 class="card-title"><%= dictionary.common.editALink %></h3>
+			<button
+				data-edit-close-modal
+				onclick="closeEditModal()"
+				style="
+					color: white;
+					background-color: #6c757d;
+					border: none;
+					outline: inherit;
+					cursor: pointer;
+					font-size: 28px;
+					line-height: 26px;
+					width: 28px;
+					height: 28px;
+					border-radius: 14px;
+					display: inline-flex;
+					text-align: center;
+					padding-left: 5px;
+				"
+			>
+				X
+			</button>
+		</div>
+		<div
+			style="
+				height: 100px;
+				padding: 8px 16px;
+				background-color: rgb(232, 234, 237);
+				border-top: 1px solid #abaeb3;
+				border-bottom: 1px solid #abaeb3;
+			"
+		>
+			<p style="margin-bottom: 8px">
+				<%= dictionary.common.shrunkLinkFor %><a id="longUrl-link" target="_blank" href="<%= urls[id] %>"></a>
+			</p>
+			<p class="card-text"><%= dictionary.common.shrunkURL %> <a id="shortUrl-link" target="_blank" href="<%= urls[id] %>"></a></p>
+		</div>
+		<div style="padding: 16px">
+			<form id="edit-form" method="POST">
+				<label for="longURL"><%= dictionary.common.newLink %></label>
+				<input name="longURL" id="longURL" placeholder="http://" style="width: 100%; margin-bottom: 16px" autocomplete="off" />
+				<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px"><%= dictionary.common.submit %></button>
+			</form>
+		</div>
+	</dialog>
+</div>
+<% } else { %>
+<div
+	id="modal-delete-overlay"
+	style="
+		display: none;
+		position: fixed;
+		z-index: -100;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.4);
+	"
+>
+	<dialog
+		data-delete-modal
+		style="width: 360px; height: 180px; border: 0px solid #6c757d; border-radius: 15px; box-shadow: 0 5px 10px #6c757d; padding: 16px 0px"
+	>
+		<div style="display: flex; justify-content: space-between; padding: 0px 16px">
+			<h3 class="card-title"><%= dictionary.common.deleteALink %></h3>
+			<button
+				data-delete-close-modal
+				onclick="closeDeleteModal()"
+				style="
+					color: white;
+					background-color: #6c757d;
+					border: none;
+					outline: inherit;
+					cursor: pointer;
+					font-size: 28px;
+					line-height: 26px;
+					width: 28px;
+					height: 28px;
+					border-radius: 14px;
+					display: inline-flex;
+					text-align: center;
+					padding-left: 5px;
+				"
+			>
+				X
+			</button>
+		</div>
+		<div
+			style="
+				height: 40px;
+				padding: 8px 16px;
+				background-color: rgb(232, 234, 237);
+				border-top: 1px solid #abaeb3;
+				border-bottom: 1px solid #abaeb3;
+			"
+		>
+			<p class="card-text"><%= dictionary.common.confirmDelete %></p>
+		</div>
+		<div style="padding: 16px">
+			<form id="delete-form" method="POST">
+				<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px"><%= dictionary.common.delete %></button>
+			</form>
+		</div>
+	</dialog>
+</div>
+<% } %>
+<script>
+	let closeButton;
+	let modal;
+
+	const openModal = (id, url, action, actionType) => {
+		if (actionType == "Edit") {
+			closeButton = document.querySelector("[data-edit-close-modal]");
+			modal = document.querySelector("[data-edit-modal]");
+			document.getElementById("modal-edit-overlay").style.display = "block";
+			document.getElementById("modal-edit-overlay").style.zIndex = "10";
+			modal.querySelector("#longUrl-link").innerHTML = url;
+			modal.querySelector("#shortUrl-link").innerHTML = id;
+			modal.querySelector("#edit-form").action = action;
+		} else {
+			closeButton = document.querySelector("[data-delete-close-modal]");
+			modal = document.querySelector("[data-delete-modal]");
+			document.getElementById("modal-delete-overlay").style.display = "block";
+			document.getElementById("modal-delete-overlay").style.zIndex = "10";
+			modal.querySelector("#delete-form").action = action;
+		}
+		modal.show(id, url, action, actionType);
+	};
+
+	const closeEditModal = () => {
+		document.getElementById("modal-edit-overlay").style.display = "none";
+		document.getElementById("modal-edit-overlay").style.zIndex = "-100";
+		modal.close();
+	};
+
+	const closeDeleteModal = () => {
+		document.getElementById("modal-delete-overlay").style.display = "none";
+		document.getElementById("modal-delete-overlay").style.zIndex = "-100";
+		modal.close();
+	};
+</script>
