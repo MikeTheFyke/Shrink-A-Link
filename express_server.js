@@ -14,12 +14,12 @@ const actionTypes = [
 ];
 
 let urlDatabase = {
-	b2xVn2: "http://www.lighthouselabs.ca",
-	"9sm5xK": "http://www.google.com",
+	b2xVn2: "http://www.reddit.ca",
+	"9sm5xK": "http://www.dogpile.com",
 };
 
 let users = {
-	testUserID: {
+	testUser: {
 		id: "testUserID",
 		username: "Testee",
 		email: "test@test.com",
@@ -185,30 +185,6 @@ app.post("/urls", (req, res) => {
 
 app.get("/urls.json", (req, res) => {
 	res.json(urlDatabase);
-});
-
-app.get("/urls/new", (req, res) => {
-	if (!req.cookies.user_id) {
-		res.redirect("/login");
-	}
-	const templateVars = {
-		user: findSelectedUserID(req.cookies.user_id),
-		dictionary: dictionary,
-	};
-	res.render("urls_new", templateVars);
-});
-
-app.get("/urls/:id", (req, res) => {
-	if (!req.cookies.user_id) {
-		res.redirect("/login");
-	}
-	const templateVars = {
-		user: findSelectedUserID(req.cookies.user_id),
-		id: req.params.id,
-		longURL: urlDatabase[req.params.id],
-		dictionary: dictionary,
-	};
-	res.render("urls_show", templateVars);
 });
 
 app.post("/urls/:id", (req, res) => {
