@@ -15,24 +15,24 @@
 	<body>
 		<%- include('partials/_header') %> <% if (error.code) { %>
 		<div id="ErrorBannerContainer">
-			<a id="close-button" style="margin-left: 14px; width: 20px; cursor: pointer">X</a>
-			<div style="width: 100%; text-align: center"><%= error.message %></div>
+			<a id="ErrorBannerCloseButton">X</a>
+			<div id="ErrorBannerTextContainer"><%= error.message %></div>
 		</div>
 		<% } %>
 		<div class="card text-center">
 			<div class="card-header"></div>
 			<div class="card-body">
 				<form method="POST" action="/register">
-					<div class="input-group" style="width: 50%; margin-left: 25%; margin-bottom: 10px">
+					<div class="input-group" id="RegistrationInputs">
 						<input name="username" id="username" autocomplete="off" placeholder="Username" type="text" class="form-control" required />
 					</div>
-					<div class="input-group" style="width: 50%; margin-left: 25%; margin-bottom: 10px">
+					<div class="input-group" id="RegistrationInputs">
 						<input name="email" id="email" autocomplete="off" placeholder="Email" type="email" class="form-control" required />
 					</div>
-					<div class="input-group" style="width: 50%; margin-left: 25%; margin-bottom: 10px">
+					<div class="input-group" id="RegistrationInputs">
 						<input name="password" id="password" autocomplete="off" placeholder="Password" type="password" class="form-control" required />
 					</div>
-					<div class="input-group" style="margin-bottom: 10px; justify-content: center">
+					<div class="input-group" id="RegistrationButton">
 						<button id="register" type="submit" class="btn btn-outline-info" style="width: 50%"><%= dictionary.common.register %></button>
 					</div>
 				</form>
@@ -56,7 +56,7 @@
 		></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script>
-			$("#close-button").click(function () {
+			$("#ErrorBannerCloseButton").click(function () {
 				$("#ErrorBannerContainer").slideUp("slow");
 			});
 		</script>
