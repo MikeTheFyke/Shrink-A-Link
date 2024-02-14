@@ -11,7 +11,7 @@ module.exports = {
 		welcome: "Welcome back ",
 		notAMember: "Not a member yet?",
 		yourLinks: "Your Links",
-		shortURL: "Short URL",
+		shortURL: "Shrunk URL",
 		longURL: "Long URL",
 		createALink: "Create A ShrinkLink",
 		enterALink: "Enter A URL :",
