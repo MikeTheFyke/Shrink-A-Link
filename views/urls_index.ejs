@@ -40,16 +40,14 @@
 								<a style="width: 300px" target="_blank" href="<%= urls[id] %>"><%= urls[id] %></a>
 							</td>
 							<td>
-								<button type="button" class="btn btn-info">
-									<a href="/urls/<%= id %>" style="text-decoration: none; color: white"><%= dictionary.common.edit %></a>
-								</button>
-								<button type="submit" class="btn btn-danger"><%= dictionary.common.delete %></button>
-								<button type="button" data-target="<%= id %>" class="btn btn-primary" onclick="openModal(`<%= id %>`, `<%= urls[id] %>`)">
+								<button type="button" data-target="<%= id %>" class="btn btn-info" onclick="openModal(`<%= id %>`, `<%= urls[id] %>`)">
 									<%= dictionary.common.edit %>
 								</button>
+								<button type="submit" class="btn btn-danger"><%= dictionary.common.delete %></button>
 							</td>
 						</form>
 					</tr>
+					<!-- Dialog -->
 					<div
 						id="modal-overlay"
 						style="
@@ -66,8 +64,18 @@
 							background-color: rgba(0, 0, 0, 0.4);
 						"
 					>
-						<dialog data-modal style="border: 0px solid #6c757d; border-radius: 15px; box-shadow: 0 5px 10px #6c757d">
-							<div style="display: flex; justify-content: space-between">
+						<dialog
+							data-modal
+							style="
+								width: 360px;
+								height: 300px;
+								border: 0px solid #6c757d;
+								border-radius: 15px;
+								box-shadow: 0 5px 10px #6c757d;
+								padding: 16px 0px;
+							"
+						>
+							<div style="display: flex; justify-content: space-between; padding: 0px 16px">
 								<h3 class="card-title"><%= dictionary.common.editALink %></h3>
 								<button
 									onclick="closeModal()"
@@ -90,11 +98,29 @@
 									X
 								</button>
 							</div>
-							<form method="POST" action="/urls/<%= id %>">
-								<label for="longURL"><%= dictionary.common.newLink %></label>
-								<input name="longURL" id="longURL" placeholder="http://" style="width: 100%; margin-bottom: 10px" autocomplete="off" />
-								<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px"><%= dictionary.common.submit %></button>
-							</form>
+							<div
+								style="
+									height: 100px;
+									padding: 8px 16px;
+									background-color: rgb(232, 234, 237);
+									border-top: 1px solid #abaeb3;
+									border-bottom: 1px solid #abaeb3;
+								"
+							>
+								<p style="margin-bottom: 8px">
+									<%= dictionary.common.shrunkLinkFor %><a id="longUrl-link" target="_blank" href="<%= urls[id] %>"></a>
+								</p>
+								<p class="card-text">
+									<%= dictionary.common.shrunkURL %> <a id="shortUrl-link" target="_blank" href="<%= urls[id] %>"></a>
+								</p>
+							</div>
+							<div style="padding: 16px">
+								<form id="edit-form" method="POST">
+									<label for="longURL"><%= dictionary.common.newLink %></label>
+									<input name="longURL" id="longURL" placeholder="http://" style="width: 100%; margin-bottom: 16px" autocomplete="off" />
+									<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px"><%= dictionary.common.submit %></button>
+								</form>
+							</div>
 						</dialog>
 					</div>
 					<% } %>
@@ -135,7 +161,10 @@
 			const openModal = (id, url) => {
 				document.getElementById("modal-overlay").style.display = "block";
 				document.getElementById("modal-overlay").style.zIndex = "10";
-				modal.show();
+				modal.querySelector("#longUrl-link").innerHTML = url;
+				modal.querySelector("#shortUrl-link").innerHTML = id;
+				modal.querySelector("#edit-form").action = `/urls/${id}`;
+				modal.show(id, url);
 			};
 
 			const closeModal = () => {
