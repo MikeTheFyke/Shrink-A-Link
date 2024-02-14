@@ -53,7 +53,7 @@
 								onclick="openModal(`<%= id %>`, `<%= urls[id] %>`, `/urls/<%= id %>/delete`, `<%= action.actionType %>`)"
 								value="<%= action.label %>"
 							/>
-							<% }%> <%- include('partials/_editdialog', {id: id, url: urls[id], dictionary, action}) %> <% }) %>
+							<% }%> <%- include('partials/_dialog', {id: id, url: urls[id], dictionary, action}) %> <% }) %>
 						</td>
 					</tr>
 					<% } %>
