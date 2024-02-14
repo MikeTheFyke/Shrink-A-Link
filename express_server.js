@@ -180,7 +180,7 @@ app.get("/urls", (req, res) => {
 app.post("/urls", (req, res) => {
 	const newId = generateRandomString();
 	urlDatabase[newId] = formatURL(req.body.longURL);
-	res.redirect(`urls/${newId}`);
+	res.redirect(`urls`);
 });
 
 app.get("/urls.json", (req, res) => {

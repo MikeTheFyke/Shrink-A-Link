@@ -21,6 +21,7 @@
 			>
 				<%= dictionary.common.yourLinks %>
 			</h3>
+			<% if (Object.keys(urls).length > 0) { %>
 			<table class="table table-striped" style="table-layout: fixed">
 				<thead>
 					<tr>
@@ -59,6 +60,24 @@
 					<% } %>
 				</tbody>
 			</table>
+
+			<% } else { %>
+			<div>
+				<div style="width: 100%; text-align: center">
+					<p><%= dictionary.common.noURLS %></p>
+				</div>
+				<div style="width: 50%; margin: auto">
+					<form action="/urls" method="POST">
+						<div class="input-group mb-3">
+							<input class="form-control" type="text" name="longURL" id="longURL" placeholder="http://" autocomplete="off" />
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-info"><%= dictionary.common.create %></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<% } %>
 		</main>
 		<!-- Bootstrap JS -->
 		<script
@@ -76,6 +95,5 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"
 		></script>
-		<script></script>
 	</body>
 </html>

@@ -6,6 +6,7 @@ module.exports = {
 		edit: "Edit",
 		delete: "Delete",
 		submit: "Submit",
+		create: "Create",
 		shrinkALink: "Shrink-A-Link",
 		welcome: "Welcome back ",
 		notAMember: "Not a member yet?",
@@ -20,6 +21,7 @@ module.exports = {
 		confirmDelete: "Are You Sure You Want To Delete This Link?",
 		shrunkURL: "Shrunk URL : ",
 		shrunkLinkFor: "Shrunk-Link for : ",
+		noURLS: "Oh Snap, you do not have any URLs. Maybe we should create some.",
 	},
 	navLinks: {
 		urls: "Your URLS",
