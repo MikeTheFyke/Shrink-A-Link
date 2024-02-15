@@ -15,7 +15,7 @@
 		<title><%= dictionary.common.shrinkALink %></title>
 	</head>
 	<body>
-		<%- include('partials/_header') %>
+		<%- include('partials/_header', {user, actionTypes}) %>
 		<main style="margin: 1em 0 1em 0">
 			<h3 id="LinkTableHeader"><%= dictionary.common.yourLinks %></h3>
 			<% if (Object.keys(urls).length > 0) { %>
@@ -44,7 +44,7 @@
 								onclick="openModal(`<%= id %>`, `<%= urls[id] %>`, `/urls/<%= id %>`, `<%= action.actionType %>`)"
 								value="<%= action.label %>"
 							/>
-							<% } else { %>
+							<% } else if ( action.actionType === 'Delete') { %>
 							<input
 								type="button"
 								class="<%= action.class %>"

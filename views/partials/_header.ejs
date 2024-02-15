@@ -37,47 +37,9 @@
 <% if (user) { %>
 <div id="MainHeaderLogoutContainer">
 	<form method="POST" action="/logout">
-		<!-- <button type="submit" class="btn btn-dark btn-sm"><%= dictionary.common.logout %></button> -->
-		<button type="button" class="btn btn-dark btn-sm" onclick="openLogoutModal(`user, dictionary`)"><%= dictionary.common.logout %></button>
+		<button type="button" class="btn btn-dark btn-sm" onclick="openModal(`<%= actionTypes[2].actionType %>`)">
+			<%= dictionary.common.logout %>
+		</button>
 	</form>
 </div>
-<!-- Dialog -->
-<!-- <div id="modal-logout-overlay" class="DialogOverlay">
-	<dialog data-logout-modal class="DialogModalMain" style="height: 200px">
-		<div class="DialogModalMainInner">
-			<h3 class="card-title"><%= dictionary.common.logout %></h3>
-			<button data-logout-close-modal onclick="closeLogoutModal()" class="DialogCloseButton" style="outline: inherit">X</button>
-		</div>
-		<div class="DialogContentContainer" style="height: 44px; text-align: center">
-			<p style="margin-bottom: 8px"><%= dictionary.common.logoutSubtitle %></p>
-		</div>
-		<div class="DialogButtonContainer">
-			<form method="POST" action="/logout">
-				<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px; margin-top: 10px">
-					<%= dictionary.common.logout %>
-				</button>
-			</form>
-		</div>
-	</dialog>
-</div> -->
 <% } %>
-
-<!-- <script>
-	let closeButton;
-	let modal;
-
-	const openLogoutModal = (user, dictionary) => {
-		closeButton = document.querySelector("[data-logout-close-modal]");
-		modal = document.querySelector("[data-logout-modal]");
-		document.getElementById("modal-logout-overlay").style.display = "block";
-		document.getElementById("modal-logout-overlay").style.zIndex = "10";
-
-		modal.show(user.username);
-	};
-
-	const closeLogoutModal = () => {
-		document.getElementById("modal-logout-overlay").style.display = "none";
-		document.getElementById("modal-logout-overlay").style.zIndex = "-100";
-		modal.close();
-	};
-</script> -->

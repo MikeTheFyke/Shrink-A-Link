@@ -22,7 +22,7 @@
 		</div>
 	</dialog>
 </div>
-<% } else { %>
+<% } else if (action.actionType === 'Delete'){ %>
 <div id="modal-delete-overlay" class="DialogOverlay">
 	<dialog data-delete-modal class="DialogModalMain" style="height: 180px">
 		<div class="DialogModalMainInner">
@@ -35,6 +35,25 @@
 		<div class="DialogButtonContainer">
 			<form id="delete-form" method="POST">
 				<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px"><%= dictionary.common.delete %></button>
+			</form>
+		</div>
+	</dialog>
+</div>
+<% } else if (action.actionType === 'Logout'){ %>
+<div id="modal-logout-overlay" class="DialogOverlay">
+	<dialog data-logout-modal class="DialogModalMain" style="height: 200px">
+		<div class="DialogModalMainInner">
+			<h3 class="card-title"><%= dictionary.common.logout %></h3>
+			<button data-logout-close-modal onclick="closeLogoutModal()" class="DialogCloseButton" style="outline: inherit">X</button>
+		</div>
+		<div class="DialogContentContainer" style="height: 44px; text-align: center">
+			<p style="margin-bottom: 8px"><%= dictionary.common.logoutSubtitle %></p>
+		</div>
+		<div class="DialogButtonContainer">
+			<form method="POST" action="/logout">
+				<button type="submit" class="btn btn-info btn-block" style="margin-bottom: 2px; margin-top: 10px">
+					<%= dictionary.common.logout %>
+				</button>
 			</form>
 		</div>
 	</dialog>
@@ -53,12 +72,17 @@
 			modal.querySelector("#longUrl-link").innerHTML = url;
 			modal.querySelector("#shortUrl-link").innerHTML = id;
 			modal.querySelector("#edit-form").action = action;
-		} else {
+		} else if (actionType == "Delete") {
 			closeButton = document.querySelector("[data-delete-close-modal]");
 			modal = document.querySelector("[data-delete-modal]");
 			document.getElementById("modal-delete-overlay").style.display = "block";
 			document.getElementById("modal-delete-overlay").style.zIndex = "10";
 			modal.querySelector("#delete-form").action = action;
+		} else {
+			closeButton = document.querySelector("[data-logout-close-modal]");
+			modal = document.querySelector("[data-logout-modal]");
+			document.getElementById("modal-logout-overlay").style.display = "block";
+			document.getElementById("modal-logout-overlay").style.zIndex = "10";
 		}
 		modal.show(id, url, action, actionType);
 	};
@@ -72,6 +96,12 @@
 	const closeDeleteModal = () => {
 		document.getElementById("modal-delete-overlay").style.display = "none";
 		document.getElementById("modal-delete-overlay").style.zIndex = "-100";
+		modal.close();
+	};
+
+	const closeLogoutModal = () => {
+		document.getElementById("modal-logout-overlay").style.display = "none";
+		document.getElementById("modal-logout-overlay").style.zIndex = "-100";
 		modal.close();
 	};
 </script>
