@@ -80,7 +80,27 @@
 		</div>
 		<div style="display: flex; justify-content: center; margin-bottom: 10px">
 			<div id="ProfileAvatarContainer">
-				<div id="ProfileAvatarEditContainer"></div>
+				<% if ( user.avatar ) { %>
+				<form action="/user" method="POST" enctype="multipart/form-data">
+					<button
+						id="ProfileAvatarEditContainer"
+						type="submit"
+						onclick="document.getElementById('getAvatar').click(),console.log('Remove click')"
+						style="background-image: url(/assets/default_trashcan.png)"
+					></button>
+					<input type="file" id="removeAvatar" style="display: none" accept="image/*" />
+				</form>
+				<% } else { %>
+				<form action="/user" method="POST" enctype="multipart/form-data">
+					<button
+						id="ProfileAvatarEditContainer"
+						type="submit"
+						onclick="document.getElementById('getAvatar').click(),console.log('Upload click')"
+						style="background-image: url(/assets/default_pencil.png)"
+					></button>
+					<input type="file" id="getAvatar" style="display: none" accept="image/*" />
+				</form>
+				<% } %>
 			</div>
 		</div>
 		<div class="DialogContentContainer" style="height: 84px; text-align: center">

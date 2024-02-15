@@ -24,6 +24,7 @@ let users = {
 		username: "Testee",
 		email: "test@test.com",
 		password: "test",
+		avatar: undefined,
 	},
 };
 
@@ -144,6 +145,10 @@ app.post("/urls/:id", (req, res) => {
 app.post("/urls/:id/delete", (req, res) => {
 	delete urlDatabase[req.params.id];
 	res.redirect("/urls");
+});
+
+app.post("/user", (req, res) => {
+	console.log("Body : ", req.body);
 });
 
 app.listen(PORT, () => {
