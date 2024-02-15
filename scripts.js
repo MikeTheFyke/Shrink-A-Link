@@ -14,14 +14,14 @@ module.exports = {
 			return urlPrefix.concat(url);
 		}
 	},
-	findSelectedUserID: function (id) {
+	findSelectedUserID: function (id, users) {
 		for (let i in users) {
 			if (users[i].id === id) {
 				return users[i];
 			}
 		}
 	},
-	findSelectedUserEmail: function (email) {
+	findSelectedUserEmail: function (email, users) {
 		for (id in users) {
 			if (email === users[id].email) {
 				return false;

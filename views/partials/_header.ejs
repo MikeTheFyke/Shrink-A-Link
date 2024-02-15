@@ -9,8 +9,11 @@
 			<a class="navbar-brand" id="HeaderText"><%= dictionary.common.shrinkALink %></a>
 		</div>
 		<% } %> <% if (user) { %>
-		<div id="MainHeaderUserTextContainer" class="navbar-nav">
-			<span id="MainHeaderUserText"><%= dictionary.common.welcome %> <%= user.username %> !</span>
+		<div style="width: 260px; display: flex; justify-content: space between">
+			<div id="MainHeaderUserTextContainer" class="navbar-nav">
+				<span id="MainHeaderUserText"><%= dictionary.common.welcome %> <%= user.username %> !</span>
+			</div>
+			<div id="MainHeaderAvatarContainer"></div>
 		</div>
 		<% } else { %>
 		<div id="MainHeaderNoUserContainer">

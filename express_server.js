@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
 	const templateVars = {
-		user: tools.findSelectedUserID(req.cookies.user_id),
+		user: tools.findSelectedUserID(req.cookies.user_id, users),
 		error: { code: undefined, message: undefined },
 		dictionary: dictionary,
 		actionTypes: actionTypes,
@@ -75,7 +75,7 @@ app.post("/logout", (req, res) => {
 
 app.get("/register", (req, res) => {
 	const templateVars = {
-		user: tools.findSelectedUserID(req.cookies.user_id),
+		user: tools.findSelectedUserID(req.cookies.user_id, users),
 		urls: urlDatabase,
 		error: { code: undefined, message: undefined },
 		dictionary: dictionary,
@@ -84,7 +84,7 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-	if (tools.findSelectedUserEmail(req.body.email)) {
+	if (tools.findSelectedUserEmail(req.body.email, users)) {
 		const userID = tools.generateRandomString();
 		users = {
 			...users,
@@ -115,7 +115,7 @@ app.get("/urls", (req, res) => {
 		res.redirect("login");
 	}
 	const templateVars = {
-		user: tools.findSelectedUserID(req.cookies.user_id),
+		user: tools.findSelectedUserID(req.cookies.user_id, users),
 		urls: urlDatabase,
 		error: { code: undefined, message: undefined },
 		dictionary: dictionary,
