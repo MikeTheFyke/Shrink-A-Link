@@ -13,7 +13,11 @@
 			<div id="MainHeaderUserTextContainer" class="navbar-nav">
 				<span id="MainHeaderUserText"><%= dictionary.common.welcome %> <%= user.username %> !</span>
 			</div>
-			<div id="MainHeaderAvatarContainer"></div>
+			<div
+				id="MainHeaderAvatarContainer"
+				onclick="openModal(`<%= actionTypes[3].actionType %>`,`<%= user %>`)"
+				style="cursor: pointer"
+			></div>
 		</div>
 		<% } else { %>
 		<div id="MainHeaderNoUserContainer">
@@ -37,7 +41,7 @@
 <% if (user) { %>
 <div id="MainHeaderLogoutContainer">
 	<form method="POST" action="/logout">
-		<button type="button" class="btn btn-dark btn-sm" onclick="openModal(`<%= actionTypes[2].actionType %>`)">
+		<button type="button" class="btn btn-dark btn-sm" onclick="openModal(`<%= actionTypes[2].actionType %>`,`<%= user %>`)">
 			<%= dictionary.common.logout %>
 		</button>
 	</form>

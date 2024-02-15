@@ -41,14 +41,14 @@
 							<input
 								type="button"
 								class="<%= action.class %>"
-								onclick="openModal(`<%= id %>`, `<%= urls[id] %>`, `/urls/<%= id %>`, `<%= action.actionType %>`)"
+								onclick="openModal(`<%= action.actionType %>`,`<%= user %>`,`<%= id %>`, `<%= urls[id] %>`, `/urls/<%= id %>`)"
 								value="<%= action.label %>"
 							/>
 							<% } else if ( action.actionType === 'Delete') { %>
 							<input
 								type="button"
 								class="<%= action.class %>"
-								onclick="openModal(`<%= id %>`, `<%= urls[id] %>`, `/urls/<%= id %>/delete`, `<%= action.actionType %>`)"
+								onclick="openModal(`<%= action.actionType %>`,`<%= user %>`,`<%= id %>`, `<%= urls[id] %>`, `/urls/<%= id %>/delete`)"
 								value="<%= action.label %>"
 							/>
 							<% }%> <%- include('partials/_dialog', {id: id, url: urls[id], dictionary, action}) %> <% }) %>

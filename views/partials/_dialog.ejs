@@ -3,7 +3,9 @@
 	<dialog data-edit-modal class="DialogModalMain" style="height: 310px">
 		<div class="DialogModalMainInner">
 			<h3 class="card-title"><%= dictionary.common.editALink %></h3>
-			<button data-edit-close-modal onclick="closeEditModal()" class="DialogCloseButton" style="outline: inherit">X</button>
+			<button data-edit-close-modal onclick="closeModal(`<%= action.actionType %>`)" class="DialogCloseButton" style="outline: inherit">
+				X
+			</button>
 		</div>
 		<div class="DialogContentContainer">
 			<p style="margin-bottom: 8px">
@@ -32,7 +34,9 @@
 	<dialog data-delete-modal class="DialogModalMain" style="height: 180px">
 		<div class="DialogModalMainInner">
 			<h3 class="card-title"><%= dictionary.common.deleteALink %></h3>
-			<button data-delete-close-modal onclick="closeDeleteModal()" class="DialogCloseButton" style="outline: inherit">X</button>
+			<button data-delete-close-modal onclick="closeModal(`<%= action.actionType %>`)" class="DialogCloseButton" style="outline: inherit">
+				X
+			</button>
 		</div>
 		<div class="DialogContentContainer" style="height: 40px">
 			<p class="card-text"><%= dictionary.common.confirmDelete %></p>
@@ -49,7 +53,9 @@
 	<dialog data-logout-modal class="DialogModalMain" style="height: 200px">
 		<div class="DialogModalMainInner">
 			<h3 class="card-title"><%= dictionary.common.logout %></h3>
-			<button data-logout-close-modal onclick="closeLogoutModal()" class="DialogCloseButton" style="outline: inherit">X</button>
+			<button data-logout-close-modal onclick="closeModal(`<%= action.actionType %>`)" class="DialogCloseButton" style="outline: inherit">
+				X
+			</button>
 		</div>
 		<div class="DialogContentContainer" style="height: 44px; text-align: center">
 			<p style="margin-bottom: 8px"><%= dictionary.common.logoutSubtitle %></p>
@@ -63,50 +69,61 @@
 		</div>
 	</dialog>
 </div>
+<% } else if (action.actionType === 'Profile'){ %>
+<div id="modal-profile-overlay" class="DialogOverlay">
+	<dialog data-profile-modal class="DialogModalMain" style="height: 340px">
+		<div class="DialogModalMainInner">
+			<h3 class="card-title"><%= dictionary.common.profile %></h3>
+			<button data-profile-close-modal onclick="closeModal(`<%= action.actionType %>`)" class="DialogCloseButton" style="outline: inherit">
+				X
+			</button>
+		</div>
+		<div style="display: flex; justify-content: center; margin-bottom: 10px">
+			<div id="ProfileAvatarContainer"></div>
+		</div>
+		<div class="DialogContentContainer" style="height: 84px; text-align: center">
+			<p style="margin-bottom: 8px"><%= user.username %></p>
+			<p><%= user.email %></p>
+		</div>
+		<div class="DialogButtonContainer">
+			<button
+				type="button"
+				class="btn btn-info btn-block"
+				style="margin-bottom: 2px; margin-top: 10px"
+				onclick="closeModal(`<%= action.actionType %>`)"
+			>
+				<%= dictionary.common.close %>
+			</button>
+		</div>
+	</dialog>
+</div>
 <% } %>
+
 <script>
 	let closeButton;
 	let modal;
 
-	const openModal = (id, url, action, actionType) => {
+	const openModal = (actionType, user, id, url, action) => {
+		const type = actionType.toLowerCase();
+		closeButton = document.querySelector(`[data-${type}-close-modal]`);
+		modal = document.querySelector(`[data-${type}-modal]`);
+		document.getElementById(`modal-${type}-overlay`).style.display = "block";
+		document.getElementById(`modal-${type}-overlay`).style.zIndex = "10";
+
 		if (actionType == "Edit") {
-			closeButton = document.querySelector("[data-edit-close-modal]");
-			modal = document.querySelector("[data-edit-modal]");
-			document.getElementById("modal-edit-overlay").style.display = "block";
-			document.getElementById("modal-edit-overlay").style.zIndex = "10";
 			modal.querySelector("#longUrl-link").innerHTML = url;
 			modal.querySelector("#shortUrl-link").innerHTML = id;
-			modal.querySelector("#edit-form").action = action;
+			modal.querySelector(`#${type}-form`).action = action;
 		} else if (actionType == "Delete") {
-			closeButton = document.querySelector("[data-delete-close-modal]");
-			modal = document.querySelector("[data-delete-modal]");
-			document.getElementById("modal-delete-overlay").style.display = "block";
-			document.getElementById("modal-delete-overlay").style.zIndex = "10";
-			modal.querySelector("#delete-form").action = action;
-		} else {
-			closeButton = document.querySelector("[data-logout-close-modal]");
-			modal = document.querySelector("[data-logout-modal]");
-			document.getElementById("modal-logout-overlay").style.display = "block";
-			document.getElementById("modal-logout-overlay").style.zIndex = "10";
+			modal.querySelector(`#${type}-form`).action = action;
 		}
 		modal.show(id, url, action, actionType);
 	};
 
-	const closeEditModal = () => {
-		document.getElementById("modal-edit-overlay").style.display = "none";
-		document.getElementById("modal-edit-overlay").style.zIndex = "-100";
-		modal.close();
-	};
-
-	const closeDeleteModal = () => {
-		document.getElementById("modal-delete-overlay").style.display = "none";
-		document.getElementById("modal-delete-overlay").style.zIndex = "-100";
-		modal.close();
-	};
-
-	const closeLogoutModal = () => {
-		document.getElementById("modal-logout-overlay").style.display = "none";
-		document.getElementById("modal-logout-overlay").style.zIndex = "-100";
+	const closeModal = (actionType) => {
+		const type = actionType.toLowerCase();
+		document.getElementById(`modal-${type}-overlay`).style.display = "none";
+		document.getElementById(`modal-${type}-overlay`).style.zIndex = "-100";
 		modal.close();
 	};
 </script>

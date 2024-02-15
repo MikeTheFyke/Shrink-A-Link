@@ -1,13 +1,15 @@
 module.exports = {
 	common: {
 		logout: "Logout",
-		logoutSubtitle: "Are You Sure you Want To Logout?",
+		logoutSubtitle: "Are You Sure You Want To Logout?",
 		login: "Login",
 		register: "Register",
 		edit: "Edit",
 		delete: "Delete",
 		submit: "Submit",
 		create: "Create",
+		profile: "Profile",
+		close: "Close",
 		shrinkALink: "Shrink-A-Link",
 		welcome: "Welcome back ",
 		notAMember: "Not a member yet?",
