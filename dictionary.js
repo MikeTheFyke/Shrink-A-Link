@@ -1,6 +1,7 @@
 module.exports = {
 	common: {
 		logout: "Logout",
+		logoutSubtitle: "Are You Sure you Want To Logout?",
 		login: "Login",
 		register: "Register",
 		edit: "Edit",
