@@ -10,6 +10,7 @@ const actionTypes = [
 	{ actionType: "Edit", class: "btn btn-info", label: dictionary.common.edit },
 	{ actionType: "Delete", class: "btn btn-danger", label: dictionary.common.delete },
 	{ actionType: "Logout", class: "btn btn-dark btn-sm", label: dictionary.common.logout },
+	{ actionType: "Profile", class: "", label: "" },
 ];
 
 let urlDatabase = {

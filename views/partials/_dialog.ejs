@@ -5,9 +5,14 @@
 			<h3 class="card-title"><%= dictionary.common.editALink %></h3>
 			<button data-edit-close-modal onclick="closeEditModal()" class="DialogCloseButton" style="outline: inherit">X</button>
 		</div>
-		<div class="DialogContentContainer" style="height: 100px">
+		<div class="DialogContentContainer">
 			<p style="margin-bottom: 8px">
-				<%= dictionary.common.shrunkLinkFor %><a id="longUrl-link" target="_blank" href="<%= urls[id] %>"></a>
+				<%= dictionary.common.shrunkLinkFor %><a
+					id="longUrl-link"
+					target="_blank"
+					href="<%= urls[id] %>"
+					style="max-width: 328px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block"
+				></a>
 			</p>
 			<p class="card-text"><%= dictionary.common.shrunkURL %> <a id="shortUrl-link" target="_blank" href="<%= urls[id] %>"></a></p>
 		</div>
