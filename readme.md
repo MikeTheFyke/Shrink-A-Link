@@ -26,3 +26,4 @@ To start express server on localhost:8080 use
 - EJS
 - cookie-parser
 - JQuery
+- Bootstrap
