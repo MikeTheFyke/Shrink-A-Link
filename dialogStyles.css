@@ -63,7 +63,7 @@
 	background-size: cover;
 }
 
-#ProfileAvatarEditContainer {
+.ProfileAvatarEditContainer {
 	width: 30px;
 	height: 30px;
 	border-radius: 15px;

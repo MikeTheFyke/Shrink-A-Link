@@ -1,6 +1,7 @@
 const dictionary = require("./dictionary.js");
 const tools = require("./scripts.js");
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const app = express();
 const PORT = 8080; // default port 8080
 
@@ -147,8 +148,14 @@ app.post("/urls/:id/delete", (req, res) => {
 	res.redirect("/urls");
 });
 
-app.post("/user", (req, res) => {
-	console.log("Body : ", req.body);
+app.post("/user/:id", fileUpload({ createParentPath: "true" }), (req, res) => {
+	if (req.body.action === "setAvatar") {
+		tools.setAvatarSelectedUserID(req.params.id, users, req.body.avatar);
+	} else {
+		tools.deleteAvatarSelectedUserID(req.params.id, users);
+	}
+
+	res.redirect("/urls");
 });
 
 app.listen(PORT, () => {

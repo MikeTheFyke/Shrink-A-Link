@@ -13,11 +13,19 @@
 			<div id="MainHeaderUserTextContainer" class="navbar-nav">
 				<span id="MainHeaderUserText"><%= dictionary.common.welcome %> <%= user.username %> !</span>
 			</div>
+			<% if (user.avatar) { %>
 			<div
 				id="MainHeaderAvatarContainer"
 				onclick="openModal(`<%= actionTypes[3].actionType %>`,`<%= user %>`)"
-				style="cursor: pointer"
+				style="cursor: pointer; background-image: url(<%= user.avatar %>)"
 			></div>
+			<% } else { %>
+			<div
+				id="MainHeaderAvatarContainer"
+				onclick="openModal(`<%= actionTypes[3].actionType %>`,`<%= user %>`)"
+				style="cursor: pointer; background-image: url(/assets/default_avatar.png)"
+			></div>
+			<% } %>
 		</div>
 		<% } else { %>
 		<div id="MainHeaderNoUserContainer">

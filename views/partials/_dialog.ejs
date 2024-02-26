@@ -79,29 +79,32 @@
 			</button>
 		</div>
 		<div style="display: flex; justify-content: center; margin-bottom: 10px">
-			<div id="ProfileAvatarContainer">
-				<% if ( user.avatar ) { %>
-				<form action="/user" method="POST" enctype="multipart/form-data">
+			<% if ( user.avatar ) { %>
+			<div id="ProfileAvatarContainer" style="background-image: url(<%= user.avatar %>)">
+				<form action="/user/ <%= user.id %>" method="POST" enctype="multipart/form-data">
 					<button
-						id="ProfileAvatarEditContainer"
+						id="removeAvatar"
+						class="ProfileAvatarEditContainer"
+						onclick="removeAvatar()"
 						type="submit"
-						onclick="document.getElementById('getAvatar').click(),console.log('Remove click')"
 						style="background-image: url(/assets/default_trashcan.png)"
 					></button>
-					<input type="file" id="removeAvatar" style="display: none" accept="image/*" />
 				</form>
-				<% } else { %>
-				<form action="/user" method="POST" enctype="multipart/form-data">
+			</div>
+			<% } else { %>
+			<div id="ProfileAvatarContainer">
+				<form id="editAvatarForm" enctype="multipart/form-data">
 					<button
-						id="ProfileAvatarEditContainer"
-						type="submit"
-						onclick="document.getElementById('getAvatar').click(),console.log('Upload click')"
+						id="editAvatar"
+						class="ProfileAvatarEditContainer"
+						onclick="addAvatar()"
+						type="button"
 						style="background-image: url(/assets/default_pencil.png)"
 					></button>
 					<input type="file" id="getAvatar" style="display: none" accept="image/*" />
 				</form>
-				<% } %>
 			</div>
+			<% } %>
 		</div>
 		<div class="DialogContentContainer" style="height: 84px; text-align: center">
 			<p style="margin-bottom: 8px"><%= user.username %></p>
@@ -120,6 +123,55 @@
 	</dialog>
 </div>
 <% } %>
+<script>
+	const addAvatar = () => {
+		let form = document.getElementById("editAvatarForm");
+		let button = document.getElementById("editAvatar");
+		let input = document.getElementById("getAvatar");
+
+		const url = "/user/<%= user.id %>";
+
+		button.onclick = () => {
+			input.click();
+		};
+
+		input.addEventListener("change", (event) => {
+			event.preventDefault(), postAvatar(event);
+		});
+
+		const postAvatar = async (event) => {
+			const myFiles = input.files[0];
+			const formData = new FormData();
+			const reader = new FileReader();
+
+			reader.readAsDataURL(myFiles);
+
+			reader.onload = function (e) {
+				if (reader.result) {
+					const data = reader.result;
+					formData.append("avatar", data);
+					formData.append("action", "setAvatar");
+					fetch(url, {
+						method: "POST",
+						body: formData,
+					});
+				}
+			};
+
+			const json = await response.json();
+		};
+	};
+</script>
+
+<script>
+	const removeAvatar = () => {
+		const url = "/user/<%= user.id %>";
+
+		fetch(url, {
+			method: "POST",
+		});
+	};
+</script>
 
 <script>
 	let closeButton;

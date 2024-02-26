@@ -29,6 +29,20 @@ module.exports = {
 		}
 		return true;
 	},
+	deleteAvatarSelectedUserID: function (id, users) {
+		for (let i in users) {
+			if (users[i].id === id) {
+				return (users[i].avatar = undefined);
+			}
+		}
+	},
+	setAvatarSelectedUserID: function (id, users, avatar) {
+		for (let i in users) {
+			if (users[i].id === id) {
+				return (users[i].avatar = avatar);
+			}
+		}
+	},
 	validateLogin: function (currentUser, users, dictionary) {
 		for (let i in users) {
 			if (users[i].userLogin === currentUser.email || users[i].userLogin === currentUser.username) {
